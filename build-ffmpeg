@@ -319,6 +319,15 @@ if build "fdk_aac"; then
 	build_done "fdk_aac"
 fi
 
+if build "librtmp"; then
+	download "https://github.com/pexip/librtmp/archive/master.zip" "librtmp.zip"
+	cd $PACKAGES/librtmp-master || exit
+	execute ./autogen.sh
+	execute ./configure --prefix=${WORKSPACE} --enable-static
+	execute make -j $MJOBS
+	execute make install
+	build_done "librtmp"
+fi
 
 build "ffmpeg"
 download "http://ffmpeg.org/releases/ffmpeg-4.1.tar.bz2" "ffmpeg-snapshot.tar.bz2"
