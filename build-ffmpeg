@@ -319,6 +319,23 @@ if build "fdk_aac"; then
 	build_done "fdk_aac"
 fi
 
+if build "openssl"; then
+	download "https://www.openssl.org/source/openssl-1.1.0j.tar.gz" "openssl-1.1.0j.tar.gz"
+	cd $PACKAGES/openssl-1.1.0j || exit
+	execute ./config --prefix=${WORKSPACE}
+	execute make -j $MJOBS
+	execute make install
+	build_done "openssl"
+fi
+
+if build "librtmp"; then
+	download "https://gitlab.com/JudgeZarbi/RTMPDump-OpenSSL-1.1/-/archive/master/RTMPDump-OpenSSL-1.1-master.tar.gz" "RTMPDump-OpenSSL-1.1-master.tar.gz"
+	cd $PACKAGES/RTMPDump-OpenSSL-1.1-master/librtmp || exit
+	perl -p -i -e "s/prefix=\/usr\/local/prefix=${WORKSPACE}/" Makefile
+	execute make -j $MJOBS
+	execute make install
+	build_done "librtmp"
+fi
 
 build "ffmpeg"
 download "http://ffmpeg.org/releases/ffmpeg-4.1.tar.bz2" "ffmpeg-snapshot.tar.bz2"
