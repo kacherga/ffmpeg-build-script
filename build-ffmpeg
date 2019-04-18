@@ -340,7 +340,7 @@ mkdir -p /usr/local/lib/x86_64-linux-gnu/
 cp -R ${WORKSPACE}/lib/pkgconfig /usr/local/lib/x86_64-linux-gnu/
 
 build "ffmpeg"
-download "http://ffmpeg.org/releases/ffmpeg-4.1.tar.bz2" "ffmpeg-snapshot.tar.bz2"
+download "http://ffmpeg.org/releases/ffmpeg-4.1.3.tar.bz2" "ffmpeg-snapshot.tar.bz2"
 cd $PACKAGES/ffmpeg-4.1 || exit
 ./configure \
     --pkgconfigdir="$WORKSPACE/lib/pkgconfig" \
